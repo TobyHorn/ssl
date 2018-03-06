@@ -1,1 +1,2 @@
-<p>Welcome Body</p>
+<body style="height:100vh; margin:0px;"><h1 style="margin:0px; text-align: center; padding-top: 225px;">Body</h1></body>
+<footer style="position:absolute; left:0; bottom: 0; width:100%; height:100px; background-color: #333333; color: #999; text-align: center;"><h1 style="margin:0px; padding-top:25px;">Footer</h1></footer>

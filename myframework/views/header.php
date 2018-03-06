@@ -1,1 +1,1 @@
-<p>Header</p>
+<header style="height:100px; width: 100%; background-color: #333; color:#999; text-align: center;"><h1 style="margin:0px; padding-top: 25px;">Header</h1></header>
