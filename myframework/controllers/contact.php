@@ -1,6 +1,6 @@
 <?php
 
-class about extends AppController{
+class contact extends AppController{
 
     public function __construct($parent){
 
@@ -12,11 +12,11 @@ class about extends AppController{
 
         $nav = ["/welcome/myMethod"=>"Home", "/about/myMethod"=>"About", "/contact/myMethod"=>"Contact Us"];
 
-        $this->getView("header",array("pagename"=>"about"));
+        $this->getView("header",array("pagename"=>"contact"));
 
         $this->getView("navigation", $nav);
 
-        $this->getView("about");
+        $this->getView("contact");
 
     }
 

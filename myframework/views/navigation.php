@@ -1,12 +1,40 @@
-<header>
 <?php
 
-echo "<nav style='width:100%; background-color: #ccc; text-align: center;'><ul style='margin:0px; list-style: none;'>";
+echo "<!-- Static navbar -->
+<nav class=\"navbar navbar-default navbar-inverse navbar-fixed-top\">
+    <div class=\"container\">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class=\"navbar-header\">
+            <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">
+                <span class=\"sr-only\">Toggle navigation</span>
+                <span class=\"icon-bar\"></span>
+                <span class=\"icon-bar\"></span>
+                <span class=\"icon-bar\"></span>
+            </button>
+            <a class=\"navbar-brand\" href=\"#\">Brand</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
+            <ul class=\"nav navbar-nav\">";
 foreach ($data as $key => $item) {
 
-    echo "<li style='display: inline-block; margin:5px;'><a href='$key' alt='$item Page' style='font-size: 1.5em; text-decoration: none; font-weight: bold; padding:5px 10px 5px 10px; color: #b22222;' onmouseover='this.style.color=\"#fff\"; this.style.backgroundColor=\"#666\"' onmouseout='this.style.color=\"#b22222\"; this.style.backgroundColor=\"transparent\"'>".$item."</a></li>";
+
+    if ($_SERVER['REQUEST_URI'] == $key) {
+        echo "<li class='active'><a href='$key' alt='$item Page'>".$item."<span class='sr-only'>(current)</span></a></li>";
+    } else {
+        echo "<li><a href='$key' alt='$item Page'>".$item."</a></li>";
 }
-echo "</ul></nav>";
+
+}
+echo "</ul>
+            <form class=\"navbar-form navbar-right\" role=\"search\">
+                <div class=\"form-group\">
+                    <input type=\"text\" class=\"form-control\" placeholder=\"Search\">
+                </div>
+                <button type=\"submit\" class=\"btn btn-default\">Submit</button>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>";
 
 ?>
-</header>
