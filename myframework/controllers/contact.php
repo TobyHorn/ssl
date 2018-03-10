@@ -1,5 +1,5 @@
 <?php
-
+/*
 class contact extends AppController{
 
     public function __construct($parent){
@@ -8,9 +8,9 @@ class contact extends AppController{
 
     }
 
-    public function myMethod(){
+    public function index(){
 
-        $nav = ["/welcome/myMethod"=>"Home", "/about/myMethod"=>"About", "/contact/myMethod"=>"Contact Us"];
+        $nav = ["/welcome"=>"Home", "/about"=>"About", "/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"contact"));
 
@@ -21,5 +21,5 @@ class contact extends AppController{
     }
 
 }
-
+*/
 ?>

@@ -4,16 +4,31 @@ class AppController{
 
     public function __construct($urlPathParts, $config){
 
-        $this->db = new PDO("mysql:dbname=".$config["dbname"].";",$config["dbuser"],$config["dbpass"]);
+        //$this->db = new PDO("mysql:dbname=".$config["dbname"].";",$config["dbuser"],$config["dbpass"]);
         $this->urlPathParts = $urlPathParts;
 
+        /*
+         * Check for the controller
+         * http://127.0.0.1/welcome
+        */
         if($urlPathParts[0]){
             include './controllers/'.$urlPathParts[0].".php";
 
             $appcon = new $urlPathParts[0]($this);
 
+            /*
+             * Check for method within the controller
+             * http://127.0.0.1/welcome/method
+            */
             if(isset($urlPathParts[1])){
                 $appcon->$urlPathParts[1]();
+            } else {
+
+                //Check for default method (index)
+                $methodVar = array($appcon,'index');
+                if(is_callable($methodVar,false,$callable_name)) {
+                    $appcon->index($this);
+                }
             }
 
         } else {
@@ -23,6 +38,13 @@ class AppController{
 
             if(isset($urlPathParts[1])){
                 $appcon->config["defaultController"][1]();
+            } else {
+
+                //Check for default method (index)
+                $methodVar = array($appcon,'index');
+                if(is_callable($methodVar,false,$callable_name)) {
+                    $appcon->index($this);
+                }
             }
         }
 
