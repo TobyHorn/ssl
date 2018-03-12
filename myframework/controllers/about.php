@@ -10,7 +10,7 @@ class about extends AppController{
 
     public function index(){
 
-        $nav = ["/welcome"=>"Home", "/welcome/about"=>"About", "/welcome/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"about"));
 

@@ -112,7 +112,7 @@ class home extends AppController{
     }
 
     //Login function (Login info user:pass == test@example.com:password)
-    public function loginRec() {
+    /*public function loginRec() {
 
         if($_REQUEST["loginEmail"]=="test@example.com"){
 
@@ -125,7 +125,7 @@ class home extends AppController{
         } else {
             echo "Invalid Email";
         }
-    }
+    }*/
 
 }
 
