@@ -14,7 +14,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
             <ul class='nav navbar-nav'>
-        <?php
+        <?
             foreach ($data as $key => $item) {
 
 
@@ -34,6 +34,11 @@
             <!--//If session exists then show profile and logout menu items-->
             <form class='navbar-form navbar-right' style="margin: 0px">
                 <ul class="nav navbar-nav navbar-right">
+
+                    <?if(@$_SESSION["isadmin"] && @$_SESSION["isadmin"]==1){?>
+                        <li><a href="/admin">Admin</a></li>
+                    <?}?>
+
                     <li><a href='/profile'>Profile</a></li>
                     <li><a href='/auth/logout'>Logout</a></li>
                 </ul>
@@ -58,7 +63,7 @@
     </div><!-- /container-fluid -->
 </nav>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<!--<script>
+<script>
     $('#loginBtn').click(function(){
         $.ajax({
             method: 'POST',
@@ -66,9 +71,11 @@
             data:{'loginEmail':$('#loginEmail').val(),'loginPass':$('#loginPass').val()},
             success:function(msg){
 
-                if(msg=='Welcome'){
-                    alert('Welcome!');
-                    window.location.href='/';
+                if(msg=='user_login') {
+                    alert('Welcome user!');
+                    window.location.href = '/profile';
+                } else if (msg=='admin_login') {
+                    alert('Welcome administrator!')
                 } else if(msg=='Invalid Email') {
                     alert('Invalid Email!')
                 } else if(msg=='Invalid Password') {
@@ -80,4 +87,4 @@
             }
         });
     });
-</script>-->
+</script>

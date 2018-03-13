@@ -1,4 +1,4 @@
-<?php
+<?
 
 class auth extends AppController{
 
@@ -15,7 +15,13 @@ class auth extends AppController{
             if ($_REQUEST['loginEmail'] == "test@example.com" && $_REQUEST["loginPass"] == "password") {
 
                 $_SESSION["loggedin"]=1;
-                header("Location:/home");
+                header("Location:/profile");
+
+            } elseif ($_REQUEST['loginEmail'] == "admin@domain.com" && $_REQUEST["loginPass"] == "admin") {
+
+                $_SESSION["loggedin"]=1;
+                $_SESSION["isadmin"]=1;
+                header("Location:/admin");
 
             } else {
 

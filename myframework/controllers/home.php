@@ -1,4 +1,4 @@
-<?php
+<?
 
 class home extends AppController{
 
@@ -42,7 +42,11 @@ class home extends AppController{
 
         $this->getView("navigation", $nav);
 
-        $this->getView("contact");
+        $random = substr( md5(rand()), 0, 7);
+
+        $this->getView("contact",array("cap"=>$random));
+
+
     }
 
     //Post-View for contact form
@@ -54,70 +58,79 @@ class home extends AppController{
 
         $this->getView("navigation", $nav);
 
-        //Validate Email
-        if(!filter_var($_POST["contactEmail"],FILTER_VALIDATE_EMAIL)) {
 
-            echo "<div class='container'>";
+        //Ensure captcha was correct
+        if($_POST["captchaInput"] == $_SESSION["captcha"]) {
 
-            //Display email error message
-            echo "<div class='alert alert-danger' style='margin-top:75px;' role='alert'><strong>Error: Invalid Email!</strong> <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
+            //Validate Email
+            if (!filter_var($_POST["contactEmail"], FILTER_VALIDATE_EMAIL)) {
 
-            //Check if the message field was filled out (with 10 characters); if not display another error message
-            if (strlen($_POST["message"]) <= 10) {
-                echo "<div class='alert alert-danger' role='alert'><strong>Error: </strong>You must enter at least 10 characters in the message field! <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
+                echo "<div class='container'>";
+
+                //Display email error message
+                echo "<div class='alert alert-danger' style='margin-top:75px;' role='alert'><strong>Error: Invalid Email!</strong> <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
+
+                //Check if the message field was filled out (with 10 characters); if not display another error message
+                if (strlen($_POST["message"]) <= 10) {
+                    echo "<div class='alert alert-danger' role='alert'><strong>Error: </strong>You must enter at least 10 characters in the message field! <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
+                }
+
+                //Check if terms were check; if not display another error message
+                if (!isset($_POST["terms"])) {
+                    echo "<div class='alert alert-danger' role='alert'><strong>Error: </strong>You must agree to the terms and conditions. <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
+                }
+
+                echo "</div>";
+
+
+                //If email is valid, check if message field was filled out correctly
+            } elseif (strlen($_POST["message"]) <= 10) {
+
+                echo "<div class='container'>";
+
+                echo "<div class='alert alert-danger' style='margin-top:75px;' role='alert'><strong>Error: </strong>You must enter at least 10 characters in the message field! <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
+
+                //Check if the terms were agreed to
+                if (!isset($_REQUEST["terms"])) {
+                    echo "<div class='alert alert-danger' role='alert'><strong>Error: </strong>You must agree to the terms and conditions. <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
+                }
+
+                echo "</div>";
+
+
+                //If message was filled out correctly, check if the terms were agreed to
+            } elseif (!isset($_REQUEST["terms"])) {
+
+                echo "<div class='container'><div class='alert alert-danger' style='margin-top:75px;' role='alert'><strong>Error: </strong>You must agree to the terms and conditions. <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div></div>";
+
+
+                //If no errors, we let the user know the submission went through
+            } else {
+
+                echo "<div class='container'><div class='alert alert-success' style='margin-top:75px;' role='alert'><strong>Success!</strong> We have received your inquiry!</div></div>";
+
             }
-
-            //Check if terms were check; if not display another error message
-            if(!isset($_POST["terms"])) {
-                echo "<div class='alert alert-danger' role='alert'><strong>Error: </strong>You must agree to the terms and conditions. <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
-            }
-
-            echo "</div>";
-
-
-
-
-            //If email is valid, check if message field was filled out correctly
-        } elseif(strlen($_POST["message"]) <=10) {
-
-            echo "<div class='container'>";
-
-            echo "<div class='alert alert-danger' style='margin-top:75px;' role='alert'><strong>Error: </strong>You must enter at least 10 characters in the message field! <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
-
-            //Check if the terms were agreed to
-            if(!isset($_REQUEST["terms"])) {
-                echo "<div class='alert alert-danger' role='alert'><strong>Error: </strong>You must agree to the terms and conditions. <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div>";
-            }
-
-            echo "</div>";
-
-
-
-
-            //If message was filled out correctly, check if the terms were agreed to
-        } elseif (!isset($_REQUEST["terms"])){
-
-            echo "<div class='container'><div class='alert alert-danger' style='margin-top:75px;' role='alert'><strong>Error: </strong>You must agree to the terms and conditions. <a href='/home/contact/' class='alert-link'>Click here to try again!</a></div></div>";
-
-
-
-
-            //If no errors, we let the user know the submission went through
         } else {
+            echo "<div class='container'><div class='alert alert-danger' style='margin-top:75px;' role='alert'><strong>Invalid captcha</strong>";
 
-            echo "<div class='container'><div class='alert alert-success' style='margin-top:75px;' role='alert'><strong>Success!</strong> We have received your inquiry!</div></div>";
-
+            echo "<br><a href='/home/contact' class='alert-link'>Click here to go back</a></div></div>";
         }
 
     }
 
     //Login function (Login info user:pass == test@example.com:password)
-    /*public function loginRec() {
+    public function loginRec() {
 
-        if($_REQUEST["loginEmail"]=="test@example.com"){
+        if($_REQUEST["loginEmail"]=="test@example.com" || $_REQUEST["loginEmail"]=="admin@domain.com"){
 
-            if($_REQUEST["loginPass"]=="password") {
-                echo "Welcome";
+            if($_REQUEST["loginEmail"]=="test@example.com" && $_REQUEST["loginPass"]=="password") {
+
+                echo "user_login";
+
+            } elseif($_REQUEST["loginEmail"]=="admin@domain.com" && $_REQUEST["loginPass"]=="admin") {
+
+                echo "admin_login";
+
             } else {
                 echo "Invalid Password";
             }
@@ -125,7 +138,7 @@ class home extends AppController{
         } else {
             echo "Invalid Email";
         }
-    }*/
+    }
 
 }
 
