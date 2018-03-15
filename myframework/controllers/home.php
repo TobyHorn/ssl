@@ -4,14 +4,12 @@ class home extends AppController{
 
     public function __construct($parent){
 
-        //var_dump($parent);
-
     }
 
     //Default function
     public function index(){
 
-        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"home"));
 
@@ -20,10 +18,10 @@ class home extends AppController{
         $this->getView("home");
 
     }
-    
+
     //About view function
     public function about(){
-        
+
         $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"about"));
@@ -31,12 +29,13 @@ class home extends AppController{
         $this->getView("navigation", $nav);
 
         $this->getView("about");
-        
+
     }
+
 
     //Contact view function
     public function contact() {
-        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"contact"));
 
@@ -52,7 +51,7 @@ class home extends AppController{
     //Post-View for contact form
     public function contactRec(){
 
-        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"contact"));
 
@@ -121,7 +120,7 @@ class home extends AppController{
     //Login function (Login info user:pass == test@example.com:password)
     public function loginRec() {
 
-        if($_REQUEST["loginEmail"]=="test@example.com" || $_REQUEST["loginEmail"]=="admin@domain.com"){
+        if($_REQUEST["loginEmail"]=="test@example.com" || $_REQUEST["loginEmail"]=="admin@domain.com" || $_REQUEST["loginEmail"]==$_SESSION["user"][0]){
 
             if($_REQUEST["loginEmail"]=="test@example.com" && $_REQUEST["loginPass"]=="password") {
 
@@ -130,6 +129,10 @@ class home extends AppController{
             } elseif($_REQUEST["loginEmail"]=="admin@domain.com" && $_REQUEST["loginPass"]=="admin") {
 
                 echo "admin_login";
+
+            } elseif($_REQUEST["loginEmail"]==$_SESSION["user"][0] && $_REQUEST["loginPass"]==$_SESSION["user"][1]) {
+
+                echo "user_login";
 
             } else {
                 echo "Invalid Password";

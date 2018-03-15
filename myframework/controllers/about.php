@@ -1,5 +1,5 @@
 <?php
-/*
+
 class about extends AppController{
 
     public function __construct($parent){
@@ -10,7 +10,7 @@ class about extends AppController{
 
     public function index(){
 
-        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"about"));
 
@@ -21,5 +21,5 @@ class about extends AppController{
     }
 
 }
-*/
+
 ?>

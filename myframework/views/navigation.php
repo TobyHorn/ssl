@@ -71,19 +71,16 @@
             data:{'loginEmail':$('#loginEmail').val(),'loginPass':$('#loginPass').val()},
             success:function(msg){
 
-                if(msg=='user_login') {
+                if(msg==='user_login') {
                     alert('Welcome user!');
                     window.location.href = '/profile';
-                } else if (msg=='admin_login') {
+                } else if (msg==='admin_login') {
                     alert('Welcome administrator!')
-                } else if(msg=='Invalid Email') {
+                } else if(msg==='Invalid Email') {
                     alert('Invalid Email!')
-                } else if(msg=='Invalid Password') {
+                } else if(msg==='Invalid Password') {
                     alert('Invalid Password!')
-                } else {
-                    alert('Invalid Login!');
                 }
-
             }
         });
     });
