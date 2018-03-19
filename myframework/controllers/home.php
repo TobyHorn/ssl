@@ -9,7 +9,7 @@ class home extends AppController{
     //Default function
     public function index(){
 
-        $nav = ["/home"=>"Home", "home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"home"));
 
@@ -32,10 +32,9 @@ class home extends AppController{
 
     }
 
-
     //Contact view function
     public function contact() {
-        $nav = ["/home"=>"Home", "home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"contact"));
 
@@ -51,7 +50,7 @@ class home extends AppController{
     //Post-View for contact form
     public function contactRec(){
 
-        $nav = ["/home"=>"Home", "home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"contact"));
 
@@ -120,7 +119,53 @@ class home extends AppController{
     //Login function (Login info user:pass == test@example.com:password)
     public function loginRec() {
 
-        if($_REQUEST["loginEmail"]=="test@example.com" || $_REQUEST["loginEmail"]=="admin@domain.com" || $_REQUEST["loginEmail"]==$_SESSION["user"][0]){
+        //Read the login text file
+        $userFile = file("./assets/login.txt");
+
+
+        if($_REQUEST['loginEmail'] && $_REQUEST["loginPass"]) {
+
+            //Loop through each line
+            foreach ($userFile as $user) {
+
+                //Split the line by the delimiter (Name = 0; Password = 1; About = 2;)
+                $splitUser = explode("|", $user);
+
+                if ($_REQUEST["loginEmail"] == $splitUser[0] && $_REQUEST["loginPass"] == $splitUser[1]) {
+
+                    $_SESSION["loggedin"]=1;
+                    $_SESSION["user"]=$splitUser;
+                    echo "user_login";
+
+                    return 0;
+                }
+
+            }
+
+            /*if ($_REQUEST['loginEmail'] == "test@example.com" && $_REQUEST["loginPass"] == "password") {
+
+                $_SESSION["loggedin"]=1;
+                header("Location:/profile");
+
+            } elseif ($_REQUEST['loginEmail'] == "admin@domain.com" && $_REQUEST["loginPass"] == "admin") {
+
+                $_SESSION["loggedin"]=1;
+                $_SESSION["isadmin"]=1;
+                header("Location:/profile");
+
+            } else {
+
+                header("Location:/home?msg=bad_login");
+
+            }*/
+
+        } else {
+
+            echo "bad_login";
+
+        }
+
+        /*if($_REQUEST["loginEmail"]=="test@example.com" || $_REQUEST["loginEmail"]=="admin@domain.com"){
 
             if($_REQUEST["loginEmail"]=="test@example.com" && $_REQUEST["loginPass"]=="password") {
 
@@ -140,7 +185,7 @@ class home extends AppController{
 
         } else {
             echo "Invalid Email";
-        }
+        }*/
     }
 
 }

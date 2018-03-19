@@ -7,12 +7,12 @@ class AppController{
 
     public function __construct($urlPathParts, $config){
 
-        //$this->db = new PDO("mysql:dbname=".$config["dbname"].";",$config["dbuser"],$config["dbpass"]);
+        $this->db = new PDO("mysql:dbname=".$config["dbname"].";",$config["dbuser"],$config["dbpass"]);
         $this->urlPathParts = $urlPathParts;
 
         /*
          * Check for the controller
-         * http://127.0.0.1/welcome
+         * http://127.0.0.1/home
         */
         if($urlPathParts[0]){
             include './controllers/'.$urlPathParts[0].".php";
@@ -21,7 +21,7 @@ class AppController{
 
             /*
              * Check for method within the controller
-             * http://127.0.0.1/welcome/method
+             * http://127.0.0.1/home/method
             */
             if(isset($urlPathParts[1])){
                 $appcon->$urlPathParts[1]();
@@ -59,10 +59,11 @@ class AppController{
 
     }
 
-    public function getModel(){
+    public function getModel($page){
 
-        //Add this later
-        //Get the page then pass data to that page(view)
+        require_once './models/'.$page.".php";
+        $model = new $page($this);
+        return $model;
     }
 
 }

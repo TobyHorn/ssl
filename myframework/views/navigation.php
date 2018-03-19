@@ -47,7 +47,7 @@
         <?}else{?>
 
             <!--//If session doesn't exist then show login form-->
-            <form class='navbar-form navbar-right' action='/auth/login' method='post'>
+            <form class='navbar-form navbar-right' action='/auth/login/' method='post'>
                 <div class='form-group'>
                     <label for='loginEmail' style='color:#9d9d9d; margin-right:1em;'>Login:</label>
                     <input type='email' class='form-control' name='loginEmail' id='loginEmail' placeholder='Email'>
@@ -74,12 +74,10 @@
                 if(msg==='user_login') {
                     alert('Welcome user!');
                     window.location.href = '/profile';
-                } else if (msg==='admin_login') {
-                    alert('Welcome administrator!')
-                } else if(msg==='Invalid Email') {
-                    alert('Invalid Email!')
-                } else if(msg==='Invalid Password') {
-                    alert('Invalid Password!')
+                } else if(msg==='bad_login') {
+                    alert('Bad Login');
+                } else {
+
                 }
             }
         });

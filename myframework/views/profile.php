@@ -12,9 +12,9 @@
             </form>
 
             <div class="header">
-                <h1><?$info = explode("@", $_SESSION["user"][0]); echo $info[0];?></h1>
+                <h1><?if(@$_SESSION["user"]){$info = explode("@", $_SESSION["user"][0]); echo $info[0];}else{?>John Murphy<?}?></h1>
                 <h4>Auto Mechanic</h4>
-                <span><?echo $_SESSION["user"][2];?></span>
+                <span><?echo @$_SESSION["user"][2];?></span>
             </div>
 
         </div>
