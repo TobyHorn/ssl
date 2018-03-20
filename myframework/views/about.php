@@ -14,7 +14,7 @@
             <ul class="list-unstyled">
             <?
                 foreach ($data as $fruit){
-                    echo "<li style='margin-top:1.5em;'><h4 style='display:inline; margin-right:1em;'>".ucfirst($fruit["name"])."</h4><a class='btn btn-info' href='/about/edit/".$fruit["id"]."'><span style='margin-right: 0.5em;' class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Edit</a></li>";
+                    echo "<li style='margin-top:1.5em;'><h4 style='display:inline; margin-right:1em;'>".ucfirst($fruit["name"])."</h4><a class='btn btn-info' style='margin-right:1em;' href='/about/updateForm?fruitName=".$fruit["name"]."&id=".$fruit["id"]."'><span style='margin-right: 0.5em;' class='glyphicon glyphicon-pencil' aria-hidden='true'></span>Edit</a><a class='btn btn-danger' href='/about/deleteItem?id=".$fruit["id"]."'><span style='margin-right: 0.5em;' class='glyphicon glyphicon-trash' aria-hidden='true'></span>Delete</a></li>";
                 }
             ?>
             </ul>

@@ -1,8 +1,8 @@
-<div class="container" style="padding-top:75px;">
+<div class="container">
 
     <div>
 
-        <h1>Add a fruit</h1>
+        <h1>Add Item</h1>
         <form class="form-inline" action="/about/addItem" method="post">
 
             <input class="form-control" type="text" name="name" placeholder="Fruit Name"/>
