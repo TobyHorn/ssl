@@ -47,7 +47,9 @@ class about extends AppController{
         $name = $_REQUEST['name'];
         $id = (int)$_REQUEST['id'];
 
-        $this->parent->getModel("fruits")->update("UPDATE fruit_table SET name = $name WHERE id = $id", array("name" => $name, "id" => $id));
+        $this->parent->getModel("fruits")->update("UPDATE fruit_table SET name = '$name' WHERE id = $id", array("name" => $name, "id" => $id));
+
+        //var_dump($this->parent->getModel("fruits")->update("UPDATE fruit_table SET name = '$name' WHERE id = $id"));
 
         header("Location:/about");
     }

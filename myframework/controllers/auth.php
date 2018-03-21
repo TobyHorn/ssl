@@ -13,11 +13,9 @@ class auth extends AppController{
 
         if ($_REQUEST['loginEmail'] && $_REQUEST["loginPass"]) {
 
-            echo "<br><br>Inside Login: ".var_dump($this->parent);
 
             $data = $this->parent->getModel("users")->select("select * from users where email = :email and password = :password", array(":email" => $_REQUEST['loginEmail'], ":password" => sha1($_REQUEST['loginPass'])));
 
-            var_dump($data);
 
             if ($data) {
 
@@ -64,6 +62,38 @@ class auth extends AppController{
         session_destroy();
         header("Location:/home");
 
+
+    }
+
+    public function register(){
+
+        if ($_REQUEST['regEmail'] && $_REQUEST["regPass"] && $_REQUEST["confirmRegPass"]) {
+
+            $email = $this->parent->getModel("users")->select("select * from users where email = :email", array(":email" => $_REQUEST['regEmail']));
+
+            if ($email) {
+
+                header("Location:/register?msg=User Exists");
+
+            } else {
+
+                if ($_REQUEST["regPass"] != $_REQUEST["confirmRegPass"]) {
+
+                    header("Location: /register?msg=Password Mismatch");
+
+                } else {
+
+                    $this->parent->getModel("users")->add("insert into users (email,password) values (:email,:password)", array(":email"=>$_REQUEST["regEmail"], ":password"=>sha1($_REQUEST["regPass"])));
+
+                    header("Location:/home?msg=registered");
+
+                }
+
+
+            }
+        } else {
+            header("Location:/home?msg=Empty Form");
+        }
 
     }
 

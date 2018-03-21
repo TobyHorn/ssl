@@ -56,7 +56,7 @@
                     <input type='password' class='form-control' name='loginPass' id='loginPass' placeholder='Password'>
                 </div>
                 <button style="margin: 0 0.5em 0 0.5em;" type='submit' id='loginBtn' class='btn btn-success'>Login</button>
-                <!--<a href="/register" id="registerBtn" class="btn btn-info">Register</a>-->
+                <a href="/register" id="registerBtn" class="btn btn-info">Register</a>
             </form>
         <?}?>
 
