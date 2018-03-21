@@ -11,7 +11,7 @@ class about extends AppController{
     //READ
     public function index(){
 
-        $nav = ["/home"=>"Home", "/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
         $data = $this->parent->getModel("fruits")->select("select * from fruit_table");
         $this->getView("header",array("pagename"=>"about"));
         $this->getView("navigation", $nav);
@@ -24,7 +24,7 @@ class about extends AppController{
     //CREATE
     public function addForm(){
 
-        $nav = ["/home"=>"Home", "/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
         $data = $this->parent->getModel("fruits")->select("select * from fruit_table");
         $this->getView("header",array("pagename"=>"about"));
         $this->getView("navigation", $nav);
@@ -55,7 +55,7 @@ class about extends AppController{
     }
 
     public function updateForm(){
-        $nav = ["/home"=>"Home", "/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
         $data = $this->parent->getModel("fruits")->select("select * from fruit_table");
         $this->getView("header",array("pagename"=>"about"));
         $this->getView("navigation", $nav);

@@ -9,7 +9,7 @@ class home extends AppController{
     //Default function
     public function index(){
 
-        $nav = ["/home"=>"Home", "/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"home"));
 
@@ -22,7 +22,7 @@ class home extends AppController{
     //About view function
     public function about(){
 
-        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"about"));
 
@@ -34,7 +34,7 @@ class home extends AppController{
 
     //Contact view function
     public function contact() {
-        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"contact"));
 
@@ -50,7 +50,7 @@ class home extends AppController{
     //Post-View for contact form
     public function contactRec(){
 
-        $nav = ["/home"=>"Home", "/home/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"contact"));
 

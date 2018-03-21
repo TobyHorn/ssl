@@ -17,7 +17,7 @@ class profile extends AppController{
 
     public function index(){
 
-        $nav = ["/home"=>"Home", "/about"=>"About", "/home/contact"=>"Contact Us"];
+        $nav = ["/home"=>"Home", "/about"=>"About", "/api/showApi"=>"API", "/shortenerC"=>"Shortener", "/home/contact"=>"Contact Us"];
 
         $this->getView("header",array("pagename"=>"profile"));
 
